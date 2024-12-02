@@ -25,7 +25,6 @@
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-
         <!-- flatten-maven-plugin -->
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <flatten.dependency.mode>all</flatten.dependency.mode>
