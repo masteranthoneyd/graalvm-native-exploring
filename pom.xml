@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>33</version>
+    </parent>
+
+    <groupId>com.yangbingdong.acme</groupId>
+    <artifactId>graalvm-native-exploring</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>hello-native-docker-build</module>
+    </modules>
+
+    <properties>
+        <revision>0.0.1-SNAPSHOT</revision>
+
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+
+        <!-- flatten-maven-plugin -->
+        <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
+        <flatten.dependency.mode>all</flatten.dependency.mode>
+        <flatten.mode>resolveCiFriendliesOnly</flatten.mode>
+        <updatePomFile>true</updatePomFile>
+        <flatten.pomElements.parent>expand</flatten.pomElements.parent>
+        <flatten.pomElements.properties>keep</flatten.pomElements.properties>
+        <flatten.pomElements.dependencyManagement>interpolate</flatten.pomElements.dependencyManagement>
+        <flatten.pomElements.dependencies>resolve</flatten.pomElements.dependencies>
+        <flatten.pomElements.distributionManagement>remove</flatten.pomElements.distributionManagement>
+        <flatten.pomElements.repositories>remove</flatten.pomElements.repositories>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven-plugin.version}</version>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <embedBuildProfileDependencies>false</embedBuildProfileDependencies>
+                        <flattenDependencyMode>${flatten.dependency.mode}</flattenDependencyMode>
+                        <flattenMode>${flatten.mode}</flattenMode>
+                        <updatePomFile>${updatePomFile}</updatePomFile>
+                        <pomElements>
+                            <parent>${flatten.pomElements.parent}</parent>
+                            <properties>${flatten.pomElements.properties}</properties>
+                            <dependencyManagement>${flatten.pomElements.dependencyManagement}</dependencyManagement>
+                            <dependencies>${flatten.pomElements.dependencies}</dependencies>
+                            <distributionManagement>${flatten.pomElements.distributionManagement}
+                            </distributionManagement>
+                            <repositories>${flatten.pomElements.repositories}</repositories>
+                        </pomElements>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>flatten.clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${version.maven-jar-plugin}</version>
+                    <configuration>
+                        <archive>
+                            <addMavenDescriptor>true</addMavenDescriptor>
+                            <index>true</index>
+                            <manifest>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                            <manifestEntries>
+                                <Specification-Version>${project.version}</Specification-Version>
+                                <Implementation-Version>${project.version}</Implementation-Version>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>Aliyun</id>
+            <name>central</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>Aliyun</id>
+            <name>central</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
