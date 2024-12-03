@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>hello-native-docker-build</module>
+        <module>hello-native-maven</module>
     </modules>
 
     <properties>
