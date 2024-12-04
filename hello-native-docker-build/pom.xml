@@ -37,6 +37,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
+                        <!-- 打包后将 Jar 包复制到 docker 目录并重命名为 App.jar -->
                         <id>copy-jar-with-dependencies</id>
                         <phase>package</phase>
                         <goals>
