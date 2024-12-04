@@ -15,7 +15,7 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>hello-native-docker-build</module>
+        <module>hello-native-build</module>
         <module>hello-native-maven</module>
     </modules>
 
@@ -25,6 +25,8 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <native.maven.plugin.version>0.10.3</native.maven.plugin.version>
 
         <!-- flatten-maven-plugin -->
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
@@ -105,6 +107,30 @@
                             </manifestEntries>
                         </archive>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.graalvm.buildtools</groupId>
+                    <artifactId>native-maven-plugin</artifactId>
+                    <version>${native.maven.plugin.version}</version>
+                    <!-- 启动 extension, 对 Junit 提供支持 -->
+                    <extensions>true</extensions>
+                    <executions>
+                        <execution>
+                            <id>build-native</id>
+                            <goals>
+                                <goal>compile-no-fork</goal>
+                            </goals>
+                            <phase>package</phase>
+                        </execution>
+                        <execution>
+                            <id>test-native</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <phase>test</phase>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

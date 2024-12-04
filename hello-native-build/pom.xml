@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>hello-native-docker-build</artifactId>
+    <artifactId>hello-native-build</artifactId>
 
     <properties>
     </properties>
@@ -51,7 +51,7 @@
                                     <version>${project.version}</version>
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.basedir}/docker</outputDirectory>
+                                    <outputDirectory>${project.basedir}/script</outputDirectory>
                                     <destFileName>App.jar</destFileName>
                                 </artifactItem>
                             </artifactItems>

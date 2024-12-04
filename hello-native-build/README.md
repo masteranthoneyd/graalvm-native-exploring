@@ -12,12 +12,12 @@
 
 **运行:**
 ```
-cd docker
+cd script
 ./build-docker-static-upx.sh
 ```
 
 * 该脚本会使用 `mvnw` 构建项目
-* package 完成后由 Maven 插件 `maven-dependency-plugin` 将 target 中的 jar 包复制到 docker 目录中
+* package 完成后由 Maven 插件 `maven-dependency-plugin` 将 target 中的 jar 包复制到 script 目录中
 * 通过指定 `scratch.static-upx.Dockerfile` 文件构建 Docker 镜像
   * 该 Dockerfile 使用 _**[graalvm23:ubuntu24-muslib](https://github.com/masteranthoneyd/dockerfile/blob/master/graalvm/23/ubuntu24-muslib/Dockerfile)**_ 作为 builder 镜像
   * 构建 static 类型的二进制可执行
