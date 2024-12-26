@@ -12,12 +12,6 @@
 
     <artifactId>hello-native-build</artifactId>
 
-    <properties>
-    </properties>
-
-    <dependencies>
-    </dependencies>
-
     <build>
         <plugins>
             <plugin>

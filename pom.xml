@@ -17,6 +17,7 @@
     <modules>
         <module>hello-native-build</module>
         <module>hello-native-maven</module>
+        <module>hello-native-polyglot</module>
     </modules>
 
     <properties>
