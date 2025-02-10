@@ -24,7 +24,8 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.yangbingdong.acme.Main</mainClass>
+                            <mainClass>com.yangbingdong.acme.Fortune</mainClass>
+                            <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
                 </configuration>
@@ -41,7 +42,7 @@
                         <groupId>org.graalvm.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
                         <configuration>
-                            <imageName>hello-maven</imageName>
+                            <imageName>fortune</imageName>
                             <verbose>true</verbose>
                             <dryRun>false</dryRun>
                             <!-- For Quick Build (22.1+) -->
@@ -52,6 +53,34 @@
                                 <!-- <buildArg>-H:+StaticExecutableWithDynamicLibC</buildArg> -->
                                 <!-- To generate the Native Image build output JSON (22.3+) -->
                                 <!-- <buildArg>-H:BuildOutputJSONFile=build.json</buildArg> -->
+                            </buildArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>native-size-optimized</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>build-native</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>compile-no-fork</goal>-->
+<!--                                </goals>-->
+<!--                                <phase>package</phase>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+                        <configuration>
+                            <imageName>fortune-optimized</imageName>
+                            <buildArgs>
+                                <buildArg>-Os</buildArg>
+                                <buildArg>--emit build-report</buildArg>
                             </buildArgs>
                         </configuration>
                     </plugin>

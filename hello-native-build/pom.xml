@@ -20,7 +20,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.yangbingdong.acme.Main</mainClass>
+                            <mainClass>com.yangbingdong.acme.Fortune</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
